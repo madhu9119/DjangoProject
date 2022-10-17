@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Project</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <a class="navbar-brand" href="#">Webkrone</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item ">
+              <a class="nav-link" href="{% url 'home'%}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+      </nav><br><br><br>
+
+
+    <h1 class="alert alert-success text-center">CRUD operations</h1>
+    <div class="container mt-3">
+        {% if set_data %}
+        <form method="POST" action="{% url 'emp_update' set_data.id %}">
+            {% csrf_token %}
+            <p>
+                {%if messages %}
+                {% for message in messages%}
+            <h2 style="color: green;" >{{message}}</h2>
+            {%endfor%}
+            {%endif%}
+            </p>
+            <div class="madhu">
+                <br>
+                <p>
+                    <h3>Edit Employee details</h3>
+                </p>
+                <div>
+                    <p>Employee Id</p>{{form.empid}}
+                    <input type="text" name="empid" value="{{set_data.empid}}">
+                </div>
+                <div>
+                    <p>Employee Name</p>{{form.empname}}
+                    <input type="text" name="empname" value="{{set_data.empname}}">
+                </div>
+                <div>
+                    <p>Employee Salary</p>{{form.empsal}}
+                    <input type="text" name="empsal" value="{{set_data.empsal}}">
+                </div>
+                <div>
+                    <p>Employee Address</p>{{form.empaddress}}
+                    <input type="text" name="empaddress" value="{{set_data.empaddress}}">
+                </div>
+            </div><br>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+        </form>
+
+        {%else%}
+        <form method="POST" action="{% url 'emp_add' %}">
+            {% csrf_token %}
+            <p>
+                {%if messages %}
+                {% for message in messages%}
+            <h2 style="color: green;" >{{message}}</h2>
+            {%endfor%}
+            {%endif%}
+            </p>
+            <div class="madhu">
+                <br>
+                <p>
+                    <h3>Enter Employee details</h3>
+                </p>
+                <div>
+                    <p>Employee Id</p>{{form.empid}}
+                    <input type="text" name="empid">
+                </div>
+                <div>
+                    <p>Employee Name</p>{{form.empname}}
+                    <input type="text" name="empname">
+                </div>
+                <div>
+                    <p>Employee Salary</p>{{form.empsal}}
+                    <input type="text" name="empsal">
+                </div>
+                <div>
+                    <p>Employee Address</p>{{form.empaddress}}
+                    <input type="text" name="empaddress">
+                </div>
+            </div><br>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </form>
+        <br><br>
+
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Emp Id</th>
+                        <th>Emp Name</th>
+                        <th>Emp Salary</th>
+                        <th>Emp Address</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in emp_data %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.empid}}</td>
+                        <td>{{i.empname}}</td>
+                        <td>{{i.empsal}}</td>
+                        <td>{{i.empaddress}}</td>
+                        <td>
+                            <a href="{% url 'emp_edit' i.id %}" class="btn btn-warning">Edit</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'emp_del' i.id %}" class="btn btn-warning">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+        </div>
+        {%endif%}
+    </div>
+      
+    <script src="{% static 'js/sample.js' %}"></script>
+</body>
+
+</html>

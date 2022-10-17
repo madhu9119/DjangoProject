@@ -1,0 +1,38 @@
+nav {
+    background-color:peru;
+}
+.navbar-brand{
+    margin-left: 150px;
+    font-size: xx-large;
+}
+nav,ul,a {
+    margin-left: auto;
+    color: black;
+}
+.jumbotron {
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 100px;
+    text-align: center;
+    background-color: yellowgreen;
+  
+}
+.madhu {
+    text-align: center;
+}
+h1 {
+    text-align: center;
+}
+p,h2 {
+    text-align: center;
+}
+body {
+    background-color: black;
+}
+
+h3,p {
+    color:whitesmoke;
+}
+thead,tr,th,tr,td {
+    color: antiquewhite;
+}
